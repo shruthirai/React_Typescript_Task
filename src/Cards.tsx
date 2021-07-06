@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-
-const url = "https://avatars.dicebear.com/api";
+import { Modal, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Card() {
   let [revealedCard, setRevealedCard] = useState<any>([]);
@@ -9,6 +9,7 @@ export default function Card() {
   let [startTimer, setStartTimer] = useState<boolean>(false);
   let initialSeconds = 30;
   let [seconds, setSeconds ] =  useState<number>(initialSeconds);
+  const [show, setShow] = useState(false);
   const avatars = [
     { name: "male"},
     { name: "female"},
@@ -19,6 +20,7 @@ export default function Card() {
     { name: "identicon"},
     { name: "gridy"}
   ];
+  const url = "https://avatars.dicebear.com/api";
 
   //pairing the 8 avatars
   const pairOfAvatars = [...avatars, ...avatars];
@@ -27,12 +29,13 @@ export default function Card() {
   useEffect(() => {
     const firstMatchedCard = pairOfAvatars[revealedCard[0]];
     const secondMatchedCard = pairOfAvatars[revealedCard[1]];
-    if (revealedCard < 2) return;
-
+    //if (revealedCard < 2) return;
+    // if both the card are same, store the name in matched array
     if (secondMatchedCard && firstMatchedCard.name === secondMatchedCard.name) {
       setMatched([...matched, firstMatchedCard.name]);
     }
 
+    //two cards are turned face down again 0.5 second after the second card was revealed
     if (revealedCard.length === 2) setTimeout(() => setRevealedCard([]), 500);
   },[revealedCard]);// eslint-disable-line react-hooks/exhaustive-deps
 
@@ -43,13 +46,9 @@ export default function Card() {
         if (seconds > 0) {
           setSeconds(seconds - 1);
         }
-        // alert popup when the time runs out
+        // open modal when the time runs out
         if (seconds === 0) {
-          alert("Your time is up!!!");
-          setMatched([]);
-          setRevealedCard([]);
-          setSeconds(30);
-          setStartTimer(false)
+          setShow(true) 
         }
       }, 500)
       return ()=> {
@@ -59,28 +58,29 @@ export default function Card() {
   });
 
   // called on click upon card
-  function revealCard(index: any) {
+  const revealCard = (index: any) => {
     if (!startTimer) {
       setStartTimer(true);
     }
     setRevealedCard((revealed) => [...revealed, index]);
   }
 
-  // called on click of restart button
-  const handleRestart = () => {
+  // reset everything on click of play again button or restart button
+  const resetAll = () => {
+    setShow(false)
     setMatched([]);
     setRevealedCard([]);
     setSeconds(30);
     setStartTimer(false)
-  };
+  }
 
   return (
     <div>
-      <h2>Your time starts now: {seconds}</h2>
+      <span className="timer">Your time starts now: {seconds}</span>
       <div className="cards">
         {pairOfAvatars.map((avatar, index) => {
           let isRevealed = false;
-          if (revealedCard.includes(index)) isRevealed = true;
+          if (revealedCard.includes(index)) isRevealed = true; 
           if (matched.includes(avatar.name)) isRevealed = true;
           return (
             <div
@@ -98,9 +98,20 @@ export default function Card() {
           );
         })}
       </div>
-      <button type="button" onClick={handleRestart}>
-        <h3>Restart</h3>
+      <button type="button" onClick={resetAll}>
+        <span className="restartButton">Restart</span>
       </button>
+      <Modal show={show}>
+        <Modal.Header>
+          <Modal.Title>Your time is Up</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Your Score:</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={resetAll}>
+            Play Again 
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

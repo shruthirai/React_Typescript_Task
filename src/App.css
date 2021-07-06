@@ -14,7 +14,7 @@
 }
 
 body {
-  background: skyblue;
+  background: skyblue !important;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -91,10 +91,23 @@ button {
   background-color: black;
 }
 
-h3 {
+button.btn.btn-secondary {
+  margin-right: 158px;
+}
+
+.modal-title.h4 {
+  margin-left: 145px;
+}
+
+.modal {
+  margin-top: 258px;
+}
+
+.restartButton {
   color: white;
 }
 
-h2 {
+.timer {
   color: royalblue;
+  font-size: x-large;
 }
