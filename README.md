@@ -1,5 +1,20 @@
 # React Coding Challenge
 
+**Name :** Shruthi Rai (Junior Frontend Developer)
+
+**About me:** I have worked few months in react but typescript i have not worked much but can manage.
+
+**About App:**
+
+1) I have used react, typescript, hooks and bootstrap for the popup modal
+2) Wrote few test cases using jest and enzyme
+3) The values are stored in the state
+3) The main logic behind app is that the two cards are compared and if the card matches then the card is revealed for rest of the game, value is stored in state and flag is set    to true and style is applied accordingly
+4) If the 2 cards do not match then the cards are face down after 0.5 sec, flag is set and style is applied accordingly.
+5) The timer is set to 30 sec by default and gets decreased by 1 once the game is on.
+6) Once the timer reaches zero, popup modal shows up.
+7) Upon clicking play again or restart button same function is called to reset the value.
+
 ## Introduction
 This project is a bare-bones React/Typescript template. Candidates who are invited to solve the coding challenge are required to fork this repository and implement any components/hooks/modules/tests they deem necessary for a good design. This challenge is confidential and candidates should keep forked repositories private. Once implemented, candidates are expected to provide private access to their interviewer(s) for code review.
 
