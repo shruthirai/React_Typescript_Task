@@ -4,7 +4,6 @@
 
 .App-header {
   min-height: 48px;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -27,7 +26,7 @@ body {
   display: grid;
   grid-template: repeat(4, 1fr) / repeat(4, 1fr);
   gap: 10px;
-  padding: 50px 0px 30px 10px;
+  padding: 15px 0px 30px 0px;
 }
 
 .avatar-card {
@@ -108,6 +107,17 @@ button.btn.btn-secondary {
 }
 
 .timer {
-  color: royalblue;
+  color: black;
   font-size: x-large;
+}
+
+h2 {
+  color: white;
+  border: solid 2px black;
+  margin: 0 auto;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  padding-top: 5px;
+  box-sizing: border-box;
 }

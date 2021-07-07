@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import "./App.css";
 import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Card() {
-  let [revealedCard, setRevealedCard] = useState<any>([]);
+  let [revealedCard, setRevealedCard] = useState<Array<number>>([]);
   let [matched, setMatched] = useState<Array<string>>([]);
   let [startTimer, setStartTimer] = useState<boolean>(false);
   let initialSeconds = 30;
@@ -58,7 +58,7 @@ export default function Card() {
   });
 
   // called on click upon card
-  const revealCard = (index: any) => {
+  const revealCard = (index: number) => {
     if (!startTimer) {
       setStartTimer(true);
     }
@@ -76,7 +76,7 @@ export default function Card() {
 
   return (
     <div>
-      <span className="timer">Your time starts now: {seconds}</span>
+      <span className="timer">Your time starts now: <h2>{seconds}</h2></span>
       <div className="cards">
         {pairOfAvatars.map((avatar, index) => {
           let isRevealed = false;
@@ -105,7 +105,6 @@ export default function Card() {
         <Modal.Header>
           <Modal.Title>Your time is Up</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Your Score:</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={resetAll}>
             Play Again 
